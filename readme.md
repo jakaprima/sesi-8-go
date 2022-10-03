@@ -6,11 +6,9 @@
 * buat main.go
 * install package:
 * go get -u gorm.io/gorm
-* go get -u gorm.io/driver/sqlite
-
-	"github.com/swaggo/gin-swagger" // gin swagger middleware
-	"github.com/swaggo/files" //swagger embed files
-
+* go get -u gorm.io/driver/postgres
+* go get -u github.com/swaggo/gin-swagger
+* go get -ugithub.com/swaggo/files
 
 
 
