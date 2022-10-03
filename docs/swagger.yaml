@@ -1,0 +1,254 @@
+basePath: /api/v1
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  models.AddPeople:
+    properties:
+      address:
+        example: address detail
+        type: string
+      name:
+        example: people name
+        type: string
+    type: object
+  models.People:
+    properties:
+      address:
+        type: string
+      id:
+        description: |-
+          gorm.Model
+          gorm.Model `json:"model"`
+        example: 1
+        format: int64
+        type: integer
+      name:
+        type: string
+    type: object
+  models.UpdatePeople:
+    properties:
+      name:
+        example: people name
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: sample API docs
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Latihan 8.8
+  version: "1.0"
+paths:
+  /peoples:
+    get:
+      consumes:
+      - application/json
+      description: get peoples
+      parameters:
+      - description: name search by q
+        format: string
+        in: query
+        name: q
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.People'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: List peoples
+      tags:
+      - peoples
+    post:
+      consumes:
+      - application/json
+      description: add by json people
+      parameters:
+      - description: Add people
+        in: body
+        name: people
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddPeople'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.People'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Add an people
+      tags:
+      - peoples
+  /peoples/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete by people ID
+      parameters:
+      - description: People ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/models.People'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Delete an people
+      tags:
+      - peoples
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      parameters:
+      - description: People ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.People'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Show an people
+      tags:
+      - peoples
+    patch:
+      consumes:
+      - application/json
+      description: Update by json people
+      parameters:
+      - description: People ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update people
+        in: body
+        name: people
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdatePeople'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.People'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Update an people
+      tags:
+      - peoples
+  /peoples/ping:
+    get:
+      consumes:
+      - application/json
+      description: do ping
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: pong
+          schema:
+            type: string
+        "400":
+          description: ok
+          schema:
+            type: string
+        "404":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: ok
+          schema:
+            type: string
+      summary: ping people
+      tags:
+      - peoples
+swagger: "2.0"
